@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Drzewo.cpp" />
+    <ClCompile Include="DrzewoElement.cpp" />
     <ClCompile Include="Dane.cpp" />
     <ClCompile Include="Kopiec.cpp" />
     <ClCompile Include="KopiecElement.cpp" />
@@ -152,6 +154,8 @@
     <ClCompile Include="WyswietlanieDrzewa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Drzewo.h" />
+    <ClInclude Include="DrzewoElement.h" />
     <ClInclude Include="Dane.h" />
     <ClInclude Include="IPotomkowie.h" />
     <ClInclude Include="IStrukturyLiniowe.h" />
@@ -163,8 +167,13 @@
     <ClInclude Include="MenuStrukturyDrzewiaste.h" />
     <ClInclude Include="MenuStrukturyLiniowe.h" />
     <ClInclude Include="IStrukturyDrzewiaste.h" />
+    <ClInclude Include="Typy.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TablicaDynamiczna.h" />
     <ClInclude Include="WyswietlanieDrzewa.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SDiZO_projekt.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

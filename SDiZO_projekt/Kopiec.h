@@ -18,7 +18,7 @@ public:
 	Kopiec();
 	~Kopiec();
 	virtual void dodaj(int liczba);
-	virtual void usun();
+	virtual void usun(int liczba = 0);
 	virtual int wyszukaj(int liczba, bool wyswietlanie);
 	virtual void wyswietl();
 private:

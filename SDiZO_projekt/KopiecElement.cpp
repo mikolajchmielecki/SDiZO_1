@@ -32,3 +32,7 @@ string KopiecElement::toString() {
 	return to_string(tablica->getTablica()[indeks]);
 }
 
+int KopiecElement::getMaksymalnaSzerokosc() {
+	return 11;
+}
+

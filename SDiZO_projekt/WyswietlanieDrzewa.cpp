@@ -5,25 +5,25 @@
 Drzewo jest definiowane przez wskaŸnik na korzeñ
 ponadto do wyœwietlania jest pottrzebna wartoœæ maksymalnej szerokoœci elementu
 */
-WyswietlanieDrzewa::WyswietlanieDrzewa(IPotomkowie* korzen, int maksymalnaSzerokosc) {
+WyswietlanieDrzewa::WyswietlanieDrzewa(IPotomkowie* korzen) {
 	this->korzen = korzen;
-	this->maksymalnaSzerokosc = maksymalnaSzerokosc;
+	this->maksymalnaSzerokosc = korzen->getMaksymalnaSzerokosc();
 	linia = "+" + powielZnak('-', maksymalnaSzerokosc) + "+";
 }
 
-void WyswietlanieDrzewa::wyswietl() {
+void WyswietlanieDrzewa::wyswietl(bool zwalniajPamiec) {
 	if (korzen == NULL) {
 		cout << "Drzewo jest puste\n";
 		return;
 	}
-	TablicaString* drzewoStrings = getDrzewoStrings(korzen);
+	TablicaString* drzewoStrings = getDrzewoStrings(korzen, zwalniajPamiec);
 	for (int i = 0; i < drzewoStrings->rozmiar; i++) {
 		cout << drzewoStrings->tablica[i] << endl;
 	}
 	zwolnijTablicaString(drzewoStrings);
 }
 
-TablicaString* WyswietlanieDrzewa::getDrzewoStrings(IPotomkowie* korzen) {
+TablicaString* WyswietlanieDrzewa::getDrzewoStrings(IPotomkowie* korzen, bool zwalniajPamiec) {
 	//w tym przypadku jest to maksymalna liczba cyfr plus znak dla liczby int
 	int szerokoscElementu = maksymalnaSzerokosc;
 	TablicaString* wynik = new TablicaString;
@@ -46,14 +46,14 @@ TablicaString* WyswietlanieDrzewa::getDrzewoStrings(IPotomkowie* korzen) {
 		TablicaString* lewePoddrzewo = NULL;
 		wynik->rozmiar = 1;
 		if (prawyPotomek != NULL) {
-			prawePoddrzewo = getDrzewoStrings(prawyPotomek);
+			prawePoddrzewo = getDrzewoStrings(prawyPotomek, zwalniajPamiec);
 			wynik->rozmiar += prawePoddrzewo->rozmiar;
 		}
 		else {
 			wynik->rozmiar++;
 		}
 		if (lewyPotomek != NULL) {
-			lewePoddrzewo = getDrzewoStrings(lewyPotomek);
+			lewePoddrzewo = getDrzewoStrings(lewyPotomek, zwalniajPamiec);
 			wynik->rozmiar += lewePoddrzewo->rozmiar;
 		}
 		else {
@@ -124,7 +124,9 @@ TablicaString* WyswietlanieDrzewa::getDrzewoStrings(IPotomkowie* korzen) {
 			wynikIndeks++;
 		}
 	}
-	delete korzen;
+	if (zwalniajPamiec) {
+		delete korzen;
+	}
 	return wynik;
 }
 

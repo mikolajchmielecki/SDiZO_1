@@ -1,6 +1,7 @@
 #include "MenuStrukturyDrzewiaste.h"
 #include "Menu.h"
 #include <iostream>
+#include "Kopiec.h"
 
 
 
@@ -64,10 +65,32 @@ void MenuStrukturyDrzewiaste::dodajMenu() {
 
 
 /*
+Sprawdzanie czy dany obiekt jest klasy T 
+*/
+template<typename Base, typename T>
+inline bool instanceof(const T* ptr) {
+	return dynamic_cast<const Base*>(ptr) != nullptr;
+}
+
+/*
 Ob³uguje usuwanie elementu z struktury
 */
 void MenuStrukturyDrzewiaste::usunMenu() {
-	struktura->usun();
+	if (instanceof<Kopiec>(struktura)) {
+		struktura->usun();
+	}
+	else {
+		string nazwy[] = { "WprowadŸ liczbê do usuniêcia: " };
+		int* wejscie = MenuStrukturyLiniowe::wprowadzanie(1, nazwy);
+		try {
+			struktura->usun(wejscie[0]);
+		}
+		catch (exception e) {
+			cout << e.what() << endl;
+		}
+		delete[] wejscie;
+	}
+
 }
 
 void MenuStrukturyDrzewiaste::wyszukajMenu() {

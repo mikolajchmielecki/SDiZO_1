@@ -15,6 +15,7 @@ Kopiec::Kopiec(TablicaDynamiczna* tablica) {
 }
 
 Kopiec::Kopiec() {
+	this->tablica = NULL;
 	Kopiec(TablicaDynamiczna());
 }
 
@@ -47,14 +48,13 @@ void Kopiec::dodaj(int liczba) {
 		indeksPotomka = indeksRodzica;
 		indeksRodzica = (indeksPotomka - 1) / 2;
 	}
-	
 }
 
 
 /*
 Usuwa korzeñ. W miejsce korzenia wk³ada ostatni element. Naprawia kopiec.
 */
-void Kopiec::usun() {
+void Kopiec::usun(int liczba) {
 	tablica->zamien(0, tablica->getRozmiar() - 1);
 	tablica->usunKoniec();
 
@@ -103,8 +103,8 @@ int Kopiec::wyszukaj(int liczba, bool wyswietlanie) {
 		KopiecElementWyszukiwanie* korzen = new KopiecElementWyszukiwanie(tablica, indeks);
 		int* sciezka = korzen->sciezka;
 		IPotomkowie* Ikorzen = korzen;
-		WyswietlanieDrzewa wyswietlanieDrzewa = WyswietlanieDrzewa(Ikorzen, 11);
-		wyswietlanieDrzewa.wyswietl();
+		WyswietlanieDrzewa wyswietlanieDrzewa = WyswietlanieDrzewa(Ikorzen);
+		wyswietlanieDrzewa.wyswietl(false);
 		delete[] sciezka;
 	}
 	if (indeks == -1) {
@@ -120,8 +120,8 @@ Kopiec jest konwertowany na drzewo ze wskaŸnikami w celu ustandaryzowania algory
 void Kopiec::wyswietl() {
 	if (tablica->getRozmiar() > 0) {
 		IPotomkowie* korzen = new KopiecElement(tablica, 0);
-		WyswietlanieDrzewa wyswietlanieDrzewa = WyswietlanieDrzewa(korzen, 11);
-		wyswietlanieDrzewa.wyswietl();
+		WyswietlanieDrzewa wyswietlanieDrzewa = WyswietlanieDrzewa(korzen);
+		wyswietlanieDrzewa.wyswietl(true);
 	}
 	else {
 		cout << "\nBrak elementów do wyœwietlenia\n";

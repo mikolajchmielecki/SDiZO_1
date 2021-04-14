@@ -8,12 +8,14 @@
 #include "MenuStrukturyDrzewiaste.h"
 #include "Lista.h"
 #include "Kopiec.h"
+#include "Drzewo.h"
+
 
 using namespace std;
 
 
 int liczbaOpcji = 6;
-string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "drzewo BST", "drzewo czerwono-czarne", "dane" };
+string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "drzewo czerwono-czarne", "drzewo AVL", "dane" };
 
 TablicaDynamiczna* daneTablica;
 
@@ -54,6 +56,16 @@ int main() {
 			delete kopiec;
 		}
 			break;
+
+		case 3:
+		{
+			Drzewo* bst = new Drzewo(daneTablica, Typ::RB);
+			IStrukturyDrzewiaste* iBST = bst;
+			MenuStrukturyDrzewiaste menuBST = MenuStrukturyDrzewiaste(iBST, "BST");
+			menuBST.menu();
+			delete bst;
+		}
+		break;
 		
 		
 		case 5:

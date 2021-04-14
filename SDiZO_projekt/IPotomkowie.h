@@ -11,5 +11,6 @@ public:
 	virtual IPotomkowie* getLewyPotomek() = 0;
 	virtual IPotomkowie* getPrawyPotomek() = 0;
 	virtual string toString() = 0;
+	virtual int getMaksymalnaSzerokosc() = 0;
 };
 
