@@ -25,7 +25,7 @@ DrzewoElement::DrzewoElement(const DrzewoElement& drzewoElement) {
     this->kolor =drzewoElement.kolor;
 }
 
-DrzewoElement::~DrzewoElement() {
+void DrzewoElement::usunPodrzewo() {
     if (lewyPotomek != NULL) {
         delete lewyPotomek;
     }
@@ -46,15 +46,17 @@ DrzewoElement* DrzewoElement::getPrawyPotomek() {
 Zwraca reprezentacjê tekstow¹ danego wierzcho³ka
 */
 string DrzewoElement::toString() {
-    string wynik = to_string(liczba);
+    string wynik = "";
     if (typ == Typ::RB) {
         if (kolor == Kolor::BLACK) {
-            wynik += " :B";
+            wynik += "B: ";
         }
         else if (kolor == Kolor::RED) {
-            wynik += " :R";
+            wynik += "R: ";
         }
     }
+    wynik += to_string(liczba);
+    
     return wynik;
 }
 

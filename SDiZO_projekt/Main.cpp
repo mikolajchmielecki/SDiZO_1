@@ -14,8 +14,8 @@
 using namespace std;
 
 
-int liczbaOpcji = 6;
-string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "drzewo czerwono-czarne", "drzewo AVL", "dane" };
+int liczbaOpcji = 7;
+string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane" };
 
 TablicaDynamiczna* daneTablica;
 
@@ -56,19 +56,26 @@ int main() {
 			delete kopiec;
 		}
 			break;
-
 		case 3:
 		{
-			Drzewo* bst = new Drzewo(daneTablica, Typ::RB);
+			Drzewo* bst = new Drzewo(daneTablica, Typ::BST);
 			IStrukturyDrzewiaste* iBST = bst;
 			MenuStrukturyDrzewiaste menuBST = MenuStrukturyDrzewiaste(iBST, "BST");
 			menuBST.menu();
 			delete bst;
 		}
+		case 4:
+		{
+			Drzewo* rb = new Drzewo(daneTablica, Typ::RB);
+			IStrukturyDrzewiaste* iRB = rb;
+			MenuStrukturyDrzewiaste menuRB = MenuStrukturyDrzewiaste(iRB, "RB");
+			menuRB.menu();
+			delete rb;
+		}
 		break;
 		
 		
-		case 5:
+		case 6:
 			Dane dane = Dane();
 			dane.menu();
 			daneTablica = dane.getTablica();

@@ -7,7 +7,7 @@ class DrzewoElement : public IPotomkowie {
 public:
 	DrzewoElement(int, DrzewoElement*, Typ);
 	DrzewoElement(const DrzewoElement& drzewoElement);
-	~DrzewoElement();
+	void usunPodrzewo();
 	virtual DrzewoElement* getLewyPotomek();
 	virtual DrzewoElement* getPrawyPotomek();
 	virtual string toString();
