@@ -75,6 +75,9 @@ void Drzewo::usun(int liczba) {
 		else if (typ == Typ::BST) {
 			usunBST(znaleziony);
 		}
+		else if (typ == Typ::AVL) {
+			usunAVL(znaleziony);
+		}
 	}
 
 }
@@ -143,199 +146,6 @@ DrzewoElement* Drzewo::wyszukajDrzewo(int liczba) {
 	}
 	return element;
 }
-
-void Drzewo::usunRB(DrzewoElement* usuwany) {
-	DrzewoElement* x = NULL;
-	DrzewoElement* zastepca = NULL;
-
-	//czy x jest NULLEM
-	bool ifXNULL = false;
-	
-
-	//na poczatku przypisujemy pod x odpowiedni element
-
-	//je¿eli obaj potomkowie s¹ NULLAMI
-	if (usuwany->prawyPotomek == NULL && usuwany->lewyPotomek == NULL) {
-		if (usuwany == korzen) {
-			delete korzen;
-			korzen = NULL;
-			return;
-		}
-		ifXNULL = true;
-		x = new DrzewoElement(0, usuwany, typ);
-		x->kolor = Kolor::BLACK;
-		usuwany->prawyPotomek = x;
-	} 
-	//je¿eli jeden z potomków jest NULLEM
-	//lewy
-	else if (usuwany->prawyPotomek != NULL && usuwany->lewyPotomek == NULL) {
-		x = usuwany->prawyPotomek;
-		zastepca = x;
-	}
-	//prawy
-	else if (usuwany->lewyPotomek != NULL && usuwany->prawyPotomek == NULL) {
-		x = usuwany->lewyPotomek;
-		zastepca = x;
-	}
-	//obaj potomkowie nie sa NULLAMI
-	else {
-		zastepca = getNastepnik(usuwany);
-		x = zastepca->prawyPotomek;
-		if (x == NULL) {
-			ifXNULL = true;
-			x = new DrzewoElement(0, zastepca, typ);
-			x->kolor = Kolor::BLACK;
-			zastepca->prawyPotomek = x;
-		}
-	}
-	DrzewoElement* xKopia = x;
-	// tworzenie kopii przed usuniêciem
-	DrzewoElement* usuwanyKopia = new DrzewoElement(*usuwany);
-
-	//algorytm usuwania dla BST bez zwalniania pamieci
-	usunBST(usuwany);
-
-
-	
-
-	//je¿eli usuniety wierzcho³ek jest czerowny a zastepca jest czerwony lub jest NULLEM
-	//koñczymy
-	if (usuwanyKopia->kolor == Kolor::RED && (zastepca == NULL || zastepca->kolor == Kolor::RED)) {
-		
-	} else
-	//je¿eli wierzcho³ek usuwany jest czarny, a zastepca jest czerwony
-	//to zmieniamy kolor zastepcy na czarny i koñczymy
-	if (usuwanyKopia->kolor == Kolor::BLACK && (zastepca != NULL && zastepca->kolor == Kolor::RED)) {
-		zastepca->kolor = Kolor::BLACK;
-	}
-	else {
-
-		//je¿eli wierzcho³ek usuwany jest czerwony, a zastêpca czarny
-		//to zmieniamy kolor zastepcy na czerwony i rozpatrujemy przypadki
-		if (usuwanyKopia->kolor == Kolor::RED && zastepca->kolor == Kolor::BLACK) {
-			zastepca->kolor = Kolor::RED;
-		}
-
-		//je¿eli wierzcho³ek usuwany jest czarny, a zastêpca jest NULLEM lub jest czarny
-		//rozpatrujmey przypadki
-
-
-		//mamy 5 przypadków
-
-		//x jest koloru czarownego
-		//zmieniamy na kolor czarny
-		if (x->kolor == Kolor::RED) {
-			x->kolor = Kolor::BLACK;
-		}
-		else {
-
-			while (true) {
-				//nowy brat X po przeniesieniu
-				DrzewoElement* brat = x->getBrat();
-
-				//1 - x jest czarny a brat jest czerwony
-				if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::RED) {
-					brat->kolor = Kolor::BLACK;
-					x->rodzic->kolor = Kolor::RED;
-					if (x->rodzic->lewyPotomek == x) {
-						rotacjaLewa(x->rodzic);
-						brat = x->rodzic->prawyPotomek;
-					}
-					else {
-						rotacjaPrawa(x->rodzic);
-						brat = x->rodzic->lewyPotomek;
-					}
-				}
-
-
-				//2 - x jest czarny i jego brat te¿ jest czarny i obaj synowie brata s¹ czarni (brat not NULL)
-				if (x->kolor == Kolor::BLACK &&
-					brat->kolor == Kolor::BLACK &&
-					(brat->lewyPotomek == NULL || brat->lewyPotomek->kolor == Kolor::BLACK) &&
-					(brat->prawyPotomek == NULL || brat->prawyPotomek->kolor == Kolor::BLACK)) {
-					brat->kolor = Kolor::RED;
-					x = x->rodzic;
-
-					//????
-					if (x->kolor == Kolor::RED || x == korzen) {
-						x->kolor = Kolor::BLACK;
-						break;
-					}
-					else {
-						continue;
-					}
-				}
-
-				//3 - - x ma kolor czarny i jego brat te¿
-				if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::BLACK) {
-					//nastepnikSyn jest lewym potomkiem, lewy potomek brata jest czerwony, a prawy jest czarny
-					if (x->rodzic->lewyPotomek == x &&
-						(brat->lewyPotomek != NULL && brat->lewyPotomek->kolor == Kolor::RED) &&
-						(brat->prawyPotomek == NULL || brat->prawyPotomek->kolor == Kolor::BLACK)) {
-
-						brat->lewyPotomek->kolor = Kolor::BLACK;//
-						brat->kolor = Kolor::RED;
-						rotacjaPrawa(brat);//
-						brat = x->rodzic->prawyPotomek;//
-
-					}
-
-					//nastepnikSyn jest prawym potomkiem, prawy potomek brata jest czerwony, a lewy jest czarny
-					if (x->rodzic->prawyPotomek == x &&
-						(brat->prawyPotomek != NULL && brat->prawyPotomek->kolor == Kolor::RED) &&
-						(brat->lewyPotomek == NULL || brat->lewyPotomek->kolor == Kolor::BLACK)) {
-
-						brat->prawyPotomek->kolor = Kolor::BLACK;//
-						brat->kolor = Kolor::RED;
-						rotacjaLewa(brat);//
-						brat = x->rodzic->lewyPotomek;//
-					}
-				}
-
-				//4 - x ma kolor czarny i jego brat te¿
-				if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::BLACK) {
-					//x jest lewym dzieckiem, a prawe dziecko brata jest czerwone
-					if (x->rodzic->lewyPotomek == x && (brat->prawyPotomek != NULL && brat->prawyPotomek->kolor == Kolor::RED)) {
-						brat->kolor = x->rodzic->kolor;
-						x->rodzic->kolor = Kolor::BLACK;
-
-						brat->prawyPotomek->kolor = Kolor::BLACK;
-						rotacjaLewa(x->rodzic);
-
-					}
-					//x jest prawym dzieckiem, a lewe dziecko brata jest czerwone
-					if (x->rodzic->prawyPotomek == x && (brat->lewyPotomek != NULL && brat->lewyPotomek->kolor == Kolor::RED)) {
-						brat->kolor = x->rodzic->kolor;
-						x->rodzic->kolor = Kolor::BLACK;
-
-						brat->lewyPotomek->kolor = Kolor::BLACK;
-						rotacjaPrawa(x->rodzic);
-
-					}
-					break;
-				}
-
-
-			}
-		}
-	}
-
-	//kasowanie jeœli pocz¹tkowo x by³o nullem
-	if (ifXNULL) {
-		if (xKopia == xKopia->rodzic->lewyPotomek) {
-			xKopia->rodzic->lewyPotomek = NULL;
-		}
-		else {
-			xKopia->rodzic->prawyPotomek = NULL;
-		}
-		delete xKopia;
-	}
-
-	//kasowanie kopii usuwanego elementu
-	delete usuwanyKopia;
-
-}
-
 
 /*
 W miejsce usuwanego wierzcho³ka wstawia zastêpcê i zwalnia pamiêæ usuwanego wierzhco³ka
@@ -406,6 +216,242 @@ void Drzewo::usunBST(DrzewoElement* usuwany) {
 	delete usuwany;
 }
 
+/*
+Usuwa element w drzewie RB
+Korzysta z algorytmu usuwania dla drzewo BST
+*/
+void Drzewo::usunRB(DrzewoElement* usuwany) {
+	DrzewoElement* x = NULL;
+	DrzewoElement* zastepca = NULL;
+
+	//czy x jest NULLEM
+	bool ifXNULL = false;
+
+
+	//na poczatku przypisujemy pod x odpowiedni element
+
+	//je¿eli obaj potomkowie s¹ NULLAMI
+	if (usuwany->prawyPotomek == NULL && usuwany->lewyPotomek == NULL) {
+		if (usuwany == korzen) {
+			delete korzen;
+			korzen = NULL;
+			return;
+		}
+		ifXNULL = true;
+		x = new DrzewoElement(0, usuwany, typ);
+		x->kolor = Kolor::BLACK;
+		usuwany->prawyPotomek = x;
+	}
+	//je¿eli jeden z potomków jest NULLEM
+	//lewy
+	else if (usuwany->prawyPotomek != NULL && usuwany->lewyPotomek == NULL) {
+		x = usuwany->prawyPotomek;
+		zastepca = x;
+	}
+	//prawy
+	else if (usuwany->lewyPotomek != NULL && usuwany->prawyPotomek == NULL) {
+		x = usuwany->lewyPotomek;
+		zastepca = x;
+	}
+	//obaj potomkowie nie sa NULLAMI
+	else {
+		zastepca = getNastepnik(usuwany);
+		x = zastepca->prawyPotomek;
+		if (x == NULL) {
+			ifXNULL = true;
+			x = new DrzewoElement(0, zastepca, typ);
+			x->kolor = Kolor::BLACK;
+			zastepca->prawyPotomek = x;
+		}
+	}
+	DrzewoElement* xKopia = x;
+	// tworzenie kopii przed usuniêciem
+	DrzewoElement* usuwanyKopia = new DrzewoElement(*usuwany);
+
+	//algorytm usuwania dla BST bez zwalniania pamieci
+	usunBST(usuwany);
+
+
+
+
+	//je¿eli usuniety wierzcho³ek jest czerowny a zastepca jest czerwony lub jest NULLEM
+	//koñczymy
+	if (usuwanyKopia->kolor == Kolor::RED && (zastepca == NULL || zastepca->kolor == Kolor::RED)) {
+
+	}
+	else
+		//je¿eli wierzcho³ek usuwany jest czarny, a zastepca jest czerwony
+		//to zmieniamy kolor zastepcy na czarny i koñczymy
+		if (usuwanyKopia->kolor == Kolor::BLACK && (zastepca != NULL && zastepca->kolor == Kolor::RED)) {
+			zastepca->kolor = Kolor::BLACK;
+		}
+		else {
+
+			//je¿eli wierzcho³ek usuwany jest czerwony, a zastêpca czarny
+			//to zmieniamy kolor zastepcy na czerwony i rozpatrujemy przypadki
+			if (usuwanyKopia->kolor == Kolor::RED && zastepca->kolor == Kolor::BLACK) {
+				zastepca->kolor = Kolor::RED;
+			}
+
+			//je¿eli wierzcho³ek usuwany jest czarny, a zastêpca jest NULLEM lub jest czarny
+			//rozpatrujmey przypadki
+
+
+			//mamy 5 przypadków
+
+			//x jest koloru czarownego
+			//zmieniamy na kolor czarny
+			if (x->kolor == Kolor::RED) {
+				x->kolor = Kolor::BLACK;
+			}
+			else {
+
+				while (true) {
+					//nowy brat X po przeniesieniu
+					DrzewoElement* brat = x->getBrat();
+
+					//1 - x jest czarny a brat jest czerwony
+					if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::RED) {
+						brat->kolor = Kolor::BLACK;
+						x->rodzic->kolor = Kolor::RED;
+						if (x->rodzic->lewyPotomek == x) {
+							rotacjaLewa(x->rodzic);
+							brat = x->rodzic->prawyPotomek;
+						}
+						else {
+							rotacjaPrawa(x->rodzic);
+							brat = x->rodzic->lewyPotomek;
+						}
+					}
+
+
+					//2 - x jest czarny i jego brat te¿ jest czarny i obaj synowie brata s¹ czarni (brat not NULL)
+					if (x->kolor == Kolor::BLACK &&
+						brat->kolor == Kolor::BLACK &&
+						(brat->lewyPotomek == NULL || brat->lewyPotomek->kolor == Kolor::BLACK) &&
+						(brat->prawyPotomek == NULL || brat->prawyPotomek->kolor == Kolor::BLACK)) {
+						brat->kolor = Kolor::RED;
+						x = x->rodzic;
+
+						//????
+						if (x->kolor == Kolor::RED || x == korzen) {
+							x->kolor = Kolor::BLACK;
+							break;
+						}
+						else {
+							continue;
+						}
+					}
+
+					//3 - - x ma kolor czarny i jego brat te¿
+					if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::BLACK) {
+						//nastepnikSyn jest lewym potomkiem, lewy potomek brata jest czerwony, a prawy jest czarny
+						if (x->rodzic->lewyPotomek == x &&
+							(brat->lewyPotomek != NULL && brat->lewyPotomek->kolor == Kolor::RED) &&
+							(brat->prawyPotomek == NULL || brat->prawyPotomek->kolor == Kolor::BLACK)) {
+
+							brat->lewyPotomek->kolor = Kolor::BLACK;//
+							brat->kolor = Kolor::RED;
+							rotacjaPrawa(brat);//
+							brat = x->rodzic->prawyPotomek;//
+
+						}
+
+						//nastepnikSyn jest prawym potomkiem, prawy potomek brata jest czerwony, a lewy jest czarny
+						if (x->rodzic->prawyPotomek == x &&
+							(brat->prawyPotomek != NULL && brat->prawyPotomek->kolor == Kolor::RED) &&
+							(brat->lewyPotomek == NULL || brat->lewyPotomek->kolor == Kolor::BLACK)) {
+
+							brat->prawyPotomek->kolor = Kolor::BLACK;//
+							brat->kolor = Kolor::RED;
+							rotacjaLewa(brat);//
+							brat = x->rodzic->lewyPotomek;//
+						}
+					}
+
+					//4 - x ma kolor czarny i jego brat te¿
+					if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::BLACK) {
+						//x jest lewym dzieckiem, a prawe dziecko brata jest czerwone
+						if (x->rodzic->lewyPotomek == x && (brat->prawyPotomek != NULL && brat->prawyPotomek->kolor == Kolor::RED)) {
+							brat->kolor = x->rodzic->kolor;
+							x->rodzic->kolor = Kolor::BLACK;
+
+							brat->prawyPotomek->kolor = Kolor::BLACK;
+							rotacjaLewa(x->rodzic);
+
+						}
+						//x jest prawym dzieckiem, a lewe dziecko brata jest czerwone
+						if (x->rodzic->prawyPotomek == x && (brat->lewyPotomek != NULL && brat->lewyPotomek->kolor == Kolor::RED)) {
+							brat->kolor = x->rodzic->kolor;
+							x->rodzic->kolor = Kolor::BLACK;
+
+							brat->lewyPotomek->kolor = Kolor::BLACK;
+							rotacjaPrawa(x->rodzic);
+
+						}
+						break;
+					}
+
+
+				}
+			}
+		}
+
+	//kasowanie jeœli pocz¹tkowo x by³o nullem
+	if (ifXNULL) {
+		if (xKopia == xKopia->rodzic->lewyPotomek) {
+			xKopia->rodzic->lewyPotomek = NULL;
+		}
+		else {
+			xKopia->rodzic->prawyPotomek = NULL;
+		}
+		delete xKopia;
+	}
+
+	//kasowanie kopii usuwanego elementu
+	delete usuwanyKopia;
+
+}
+
+/*
+Usuwa element z drzewa AVL
+Korzysta z usuwawnia dla drzewa BST
+Altualizuje i ewentualnie naprawia wspó³czynniki wywa¿enia od rodzica usuwanego elementu do korzenia
+*/
+void Drzewo::usunAVL(DrzewoElement* usuwany) {
+	//szukam rodzica od którego nale¿y naprawiaæ drzewo AVL
+	
+	//zastepca usuwanego elementu lub usuwany element
+	DrzewoElement* zastepca; //y
+	//jeœli jeden z potomków jest NULLEM
+	if (usuwany->lewyPotomek == NULL || usuwany->prawyPotomek == NULL) {
+		//zastepca jest usuwanym elementem
+		zastepca = usuwany;
+	}
+	else {
+		//zastepca jest nastêpnikiem usuwanego elementu
+		zastepca = getNastepnik(usuwany);
+	}
+	DrzewoElement* pierwszyNaprawiany;
+
+	//nastepnik jest prawym potomkiem
+	if (zastepca->rodzic == usuwany) {
+		pierwszyNaprawiany = zastepca;
+	}
+	else {
+		pierwszyNaprawiany = zastepca->rodzic;
+	}
+	//zwyk³e usuwanie
+	usunBST(usuwany);
+
+	//naprawianie od rodzica usunietego do korzenia
+	if (pierwszyNaprawiany != NULL) {
+		aktualizujWywazenia(pierwszyNaprawiany);
+	}
+	
+}
+
+
 void Drzewo::wyswietl() {
 	if (korzen != NULL) {
 		WyswietlanieDrzewa wyswietlanieDrzewa = WyswietlanieDrzewa(korzen);
@@ -438,6 +484,9 @@ void Drzewo::umiescElement(int liczba) {
 	umiescElement(nowy);
 	if (typ == Typ::RB) {
 		naprawRB(nowy);
+	}
+	else if (typ == Typ::AVL) {
+		naprawAVL(nowy);
 	}
 
 }
@@ -547,6 +596,76 @@ void Drzewo::naprawRB(DrzewoElement* nowy) {
 	}
 	return;
 }
+
+
+/*
+Naprawia drzewo AVL po wstawieniu nowego elementu
+Aktualizuje i ewentualnie poprawia wspó³czynniki wywa¿enia od wstawioenego elementu do korzenia
+*/
+void Drzewo::naprawAVL(DrzewoElement* nowy) {
+	//jesli wstawiany element jest korzeniem
+	if (nowy == korzen) {
+		return;
+	}
+
+	aktualizujWywazenia(nowy->rodzic);
+	
+}
+
+
+/*
+Aktualizuje wywa¿enia od wskazanego elementu do korzenia
+*/
+void Drzewo::aktualizujWywazenia(DrzewoElement* element) {
+	//aktualizujemy wysokosci od wskazanego elementu do korzenia
+	//jesli wywazanie ma wartoœæ -2 lub 2 to naprawiamy
+	while (element != NULL) {
+		
+		int wywazenie = element->getWywazenie();
+
+		//przypadki wymagaj¹ce naprawy
+		if (wywazenie == -2) {
+			//LR
+			if (element->prawyPotomek->getWywazenie() == 1) {
+				rotacjaPrawa(element->prawyPotomek);
+				element->prawyPotomek->prawyPotomek->aktualizujWysokosc();
+				element->prawyPotomek->aktualizujWysokosc();
+			}
+			
+			//L
+			rotacjaLewa(element);
+			element->aktualizujWysokosc();
+			element->rodzic->aktualizujWysokosc();
+			element = element->rodzic->rodzic;
+			continue;
+
+			
+		}
+		else if (wywazenie == 2) {
+			//LR
+			if (element->lewyPotomek->getWywazenie() == -1) {
+				rotacjaLewa(element->lewyPotomek);
+				element->lewyPotomek->lewyPotomek->aktualizujWysokosc();
+				element->lewyPotomek->aktualizujWysokosc();
+			}
+			rotacjaPrawa(element);
+			element->aktualizujWysokosc();
+			element->rodzic->aktualizujWysokosc();
+			element = element->rodzic->rodzic;
+			continue;
+
+
+		}
+
+
+		//konæowe operacje pêtli
+		element->aktualizujWysokosc();
+		element = element->rodzic;
+	}
+}
+
+
+
 
 /*
 Przeprowadza praw¹ rotacjê wzglêdem danego wierzcho³ka

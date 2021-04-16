@@ -64,6 +64,7 @@ int main() {
 			menuBST.menu();
 			delete bst;
 		}
+		break;
 		case 4:
 		{
 			Drzewo* rb = new Drzewo(daneTablica, Typ::RB);
@@ -71,6 +72,15 @@ int main() {
 			MenuStrukturyDrzewiaste menuRB = MenuStrukturyDrzewiaste(iRB, "RB");
 			menuRB.menu();
 			delete rb;
+		}
+		break;
+		case 5:
+		{
+			Drzewo* avl = new Drzewo(daneTablica, Typ::AVL);
+			IStrukturyDrzewiaste* iAVL = avl;
+			MenuStrukturyDrzewiaste menuAVL = MenuStrukturyDrzewiaste(iAVL, "AVL");
+			menuAVL.menu();
+			delete avl;
 		}
 		break;
 		

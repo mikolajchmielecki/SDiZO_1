@@ -29,8 +29,11 @@ private:
 	DrzewoElement* wyszukajDrzewo(int liczba);
 	void usunRB(DrzewoElement* usuwanyElement);
 	void usunBST(DrzewoElement* element);
+	void usunAVL(DrzewoElement*);
 	void umiescElement(DrzewoElement*);
 	void naprawRB(DrzewoElement*);
+	void naprawAVL(DrzewoElement*);
+	void aktualizujWywazenia(DrzewoElement*);
 	void rotacjaPrawa(DrzewoElement*);
 	void rotacjaLewa(DrzewoElement*);
 	DrzewoElement* getNastepnik(DrzewoElement*);

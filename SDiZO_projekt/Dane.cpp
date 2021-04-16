@@ -11,7 +11,7 @@ Dane s¹ wczytywane do tablicy dynamicznej
 */
 
 Dane::Dane() {
-	liczbaOpcji = 2;
+	liczbaOpcji = 4;
 	
 	this->sciezka = "c:/dane.txt";
 	
@@ -19,13 +19,14 @@ Dane::Dane() {
 }
 
 void Dane::menu() {
-	string tablica[] = { "wczytaj dane", "ustaw œcie¿kê" };
+	string tablica[] = { "wczytaj dane", "ustaw œcie¿kê", "wyœwietl œcie¿kê", "kasuj dane" };
 	Menu menu = Menu(liczbaOpcji, tablica, "Dane");
 	while (menu.czyUruchomione()) {
 		switch (menu.wyswietl()) {
 		case 0:
 			try {
 				wczytaj();
+				cout << "Dane wczytano pomyœlnie" << endl;
 			}
 			catch (exception e) {
 				cout << e.what() << endl;
@@ -33,6 +34,16 @@ void Dane::menu() {
 			break;
 		case 1:
 			ustawSciezke();
+			cout << "Œcie¿ka ustawiona" << endl;
+			break;
+
+		case 2:
+			cout << sciezka << endl;
+			break;
+		case 3:
+			delete this->tablica;
+			this->tablica = NULL;
+			cout << "Dane skasowano pomyœlnie" << endl;
 			break;
 		} 
 	}

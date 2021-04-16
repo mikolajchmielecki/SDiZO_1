@@ -12,12 +12,16 @@ public:
 	virtual DrzewoElement* getPrawyPotomek();
 	virtual string toString();
 	virtual int getMaksymalnaSzerokosc();
+	void aktualizujWysokosc();
 	DrzewoElement* getBrat();
+	int getWywazenie();
 	int liczba;
 	DrzewoElement* rodzic;
 	DrzewoElement* lewyPotomek;
 	DrzewoElement* prawyPotomek;
 	Typ typ;
 	Kolor kolor;
+	int wysokosc;
+	int getMax(int, int);
 };
 
