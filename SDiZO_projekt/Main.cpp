@@ -86,10 +86,13 @@ int main() {
 		
 		
 		case 6:
+		{
 			Dane dane = Dane(daneTablica);
 			dane.menu();
 			daneTablica = dane.getTablica();
-			break;
+			
+		}
+		break;
 		case 7:
 			break;
 		}

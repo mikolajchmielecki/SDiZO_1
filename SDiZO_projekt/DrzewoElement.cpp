@@ -25,15 +25,17 @@ DrzewoElement::DrzewoElement(const DrzewoElement& drzewoElement) {
     this->lewyPotomek = NULL;
     this->rodzic = NULL;
     this->typ = drzewoElement.typ;
-    this->kolor =drzewoElement.kolor;
+    this->kolor = drzewoElement.kolor;
     this->wysokosc = 1;
 }
 
 void DrzewoElement::usunPodrzewo() {
     if (lewyPotomek != NULL) {
+        lewyPotomek->usunPodrzewo();
         delete lewyPotomek;
     }
     if (prawyPotomek != NULL) {
+        prawyPotomek->usunPodrzewo();
         delete prawyPotomek;
     }
 }
