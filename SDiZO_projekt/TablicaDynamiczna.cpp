@@ -1,6 +1,7 @@
 #include "TablicaDynamiczna.h"
 #include <iostream>
 #include "Menu.h"
+#include <random>
 
 using namespace std;
 
@@ -11,6 +12,7 @@ Tworzy tablicê dynamiczn¹
 TablicaDynamiczna::TablicaDynamiczna(int rozmiar, int tablica[]) {
 	this->rozmiar = rozmiar;
 	this->tablica = tablica;
+	this->losowaLiczba = 0;
 }
 
 /*
@@ -18,6 +20,7 @@ Inicjuje pust¹ tablicê
 */
 TablicaDynamiczna::TablicaDynamiczna() {
 	this->rozmiar = 0;
+	this->losowaLiczba = 0;
 	tablica = NULL;
 }
 
@@ -187,6 +190,30 @@ void TablicaDynamiczna::zamien(int indeks1, int indeks2) {
 	int bufor = tablica[indeks1];
 	tablica[indeks1] = tablica[indeks2];
 	tablica[indeks2] = bufor;
+}
+
+/*
+W tablice wpisuje losowe dane, zadanej d³ugoœci
+Zapisuje losowy element
+*/
+void TablicaDynamiczna::generujLosoweDane(int liczbaDanych) {
+	if (tablica != NULL) {
+		delete[] tablica;
+	}
+	tablica = new int[liczbaDanych];
+	rozmiar = liczbaDanych;
+	random_device rd; // non-deterministic generator
+	mt19937 gen(rd()); // random engine seeded with rd()
+	uniform_int_distribution<> zakresDanych(0, liczbaDanych-1); // zakres wartoœci int
+	int indeksLosowejLiczby = zakresDanych(gen);
+	uniform_int_distribution<> zakresInt(-2147483648, 2147483647); // zakres wartoœci int
+	for (int i = 0; i < liczbaDanych; i++) {
+		tablica[i] = zakresInt(gen);
+		if (i == indeksLosowejLiczby) {
+			losowaLiczba = tablica[i];
+		}
+	}
+
 }
 
 

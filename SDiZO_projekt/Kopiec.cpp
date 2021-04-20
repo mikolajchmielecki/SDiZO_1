@@ -133,7 +133,6 @@ Naprawia kopiec wg algorytmu Floyda
 */
 void Kopiec::algorytmFloyda() {
 	for (int i = (tablica->getRozmiar() - 2) / 2; i >= 0; i--) {
-		tablica->wyswietl();
 		naprawKopiecDol(i);
 	}
 }
@@ -153,17 +152,15 @@ void Kopiec::naprawKopiecDol(int indeks) {
 	if (indeks * 2 + 2 < rozmiar) {
 		prawyPotomekIndeks = indeks * 2 + 2;
 	}
+	
 	//istnieje tylko lewy potomek
-	if (prawyPotomekIndeks == -1) {
+	if (prawyPotomekIndeks == -1 && lewyPotomekIndeks != -1) {
 		if (tablica->getTablica()[lewyPotomekIndeks] > tablica->getTablica()[indeks]) {
 			tablica->zamien(lewyPotomekIndeks, indeks);
 		}
 	}
 	//istniej¹ oba potomki
 	else if (lewyPotomekIndeks != -1 && prawyPotomekIndeks != -1) {
-		cout << to_string(lewyPotomekIndeks) + " ";
-		cout << to_string(prawyPotomekIndeks) + " ";
-		cout << to_string(indeks) + " ";
 		//znajdowanie maksymalnej wartoœci
 		int max = tablica->getTablica()[indeks];
 		if (tablica->getTablica()[lewyPotomekIndeks] > max) {

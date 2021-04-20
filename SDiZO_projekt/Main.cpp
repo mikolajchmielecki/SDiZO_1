@@ -14,15 +14,15 @@
 using namespace std;
 
 
-int liczbaOpcji = 7;
-string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane" };
+int liczbaOpcji = 8;
+string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane", "przeprowadü testy" };
 
 TablicaDynamiczna* daneTablica = new TablicaDynamiczna();
 
 
 int main() {
 	setlocale(LC_ALL, "polish");
-	
+
 	cout << "SDiZO projekt\n";
 	Menu menu = Menu(liczbaOpcji, opcje, "Menu g≥Ûwne");
 	while (menu.czyUruchomione()) {
@@ -89,6 +89,8 @@ int main() {
 			Dane dane = Dane(daneTablica);
 			dane.menu();
 			daneTablica = dane.getTablica();
+			break;
+		case 7:
 			break;
 		}
 	}
