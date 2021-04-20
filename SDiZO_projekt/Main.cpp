@@ -33,7 +33,7 @@ int main() {
 			IStrukturyLiniowe * iTablica = tablica;
 			MenuStrukturyLiniowe menuTablica = MenuStrukturyLiniowe(iTablica, "Tablica dynamiczna");
 			menuTablica.menu();
-			delete tablica;
+			//delete tablica;
 		}
 			break;
 		case 1:
@@ -86,7 +86,7 @@ int main() {
 		
 		
 		case 6:
-			Dane dane = Dane();
+			Dane dane = Dane(daneTablica);
 			dane.menu();
 			daneTablica = dane.getTablica();
 			break;

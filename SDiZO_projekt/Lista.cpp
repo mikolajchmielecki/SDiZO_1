@@ -36,7 +36,9 @@ Lista::Lista(TablicaDynamiczna* tablica) {
 	ogon = NULL;
 	//inicjalizuje pust¹ tablicê
 	if (rozmiar < 1) {
-		Lista();
+		rozmiar = 0;
+		glowa = NULL;
+		ogon = NULL;;
 		return;
 	}
 	//tworzy listê na podstwie kolejnych elementów tablicy

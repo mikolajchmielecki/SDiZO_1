@@ -10,10 +10,11 @@ Klasa odpowiada za wczytywanie danych z pliku tekstowego.
 Dane s¹ wczytywane do tablicy dynamicznej
 */
 
-Dane::Dane() {
+Dane::Dane(TablicaDynamiczna* tablica) {
 	liczbaOpcji = 4;
 	
 	this->sciezka = "dane.txt";
+	this->tablica = tablica;
 	
 
 }
@@ -42,7 +43,7 @@ void Dane::menu() {
 			break;
 		case 3:
 			delete this->tablica;
-			this->tablica = NULL;
+			this->tablica = new TablicaDynamiczna();
 			cout << "Dane skasowano pomyœlnie" << endl;
 			break;
 		} 

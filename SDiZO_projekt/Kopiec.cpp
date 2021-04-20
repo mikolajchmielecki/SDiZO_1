@@ -9,7 +9,7 @@
 tworzy kopiec kopiuj¹c dane z tablicy dynamicznej 
 */
 Kopiec::Kopiec(TablicaDynamiczna* tablica) {
-	this->tablica = new TablicaDynamiczna(*tablica);
+	this->tablica = tablica;
 
 	algorytmFloyda();
 }
@@ -23,7 +23,7 @@ Kopiec::Kopiec() {
 Zwalnia pamiêæ po tablicy
 */
 Kopiec::~Kopiec() {
-	delete tablica;
+	//delete tablica;
 	cout << "\nDestruktor kopiec\n";
 }
 
@@ -143,8 +143,16 @@ void Kopiec::algorytmFloyda() {
 Naprawia kopiec w dó³ od zadanego indeksu
 */
 void Kopiec::naprawKopiecDol(int indeks) {
-	int lewyPotomekIndeks = indeks * 2 + 1 < tablica->getRozmiar() ? indeks * 2 + 1 : -1;
-	int prawyPotomekIndeks = indeks * 2 + 2 < tablica->getRozmiar() ? indeks * 2 + 2 : -1;
+	int rozmiar = tablica->getRozmiar();
+	int lewyPotomekIndeks = -1;
+	int prawyPotomekIndeks = -1;
+	
+	if (indeks * 2 + 1 < rozmiar) {
+		lewyPotomekIndeks = indeks * 2 + 1;
+	}
+	if (indeks * 2 + 2 < rozmiar) {
+		prawyPotomekIndeks = indeks * 2 + 2;
+	}
 	//istnieje tylko lewy potomek
 	if (prawyPotomekIndeks == -1) {
 		if (tablica->getTablica()[lewyPotomekIndeks] > tablica->getTablica()[indeks]) {
@@ -153,9 +161,9 @@ void Kopiec::naprawKopiecDol(int indeks) {
 	}
 	//istniej¹ oba potomki
 	else if (lewyPotomekIndeks != -1 && prawyPotomekIndeks != -1) {
-		cout << lewyPotomekIndeks +" ";
-		cout << prawyPotomekIndeks +" ";
-		cout << indeks +" ";
+		cout << to_string(lewyPotomekIndeks) + " ";
+		cout << to_string(prawyPotomekIndeks) + " ";
+		cout << to_string(indeks) + " ";
 		//znajdowanie maksymalnej wartoœci
 		int max = tablica->getTablica()[indeks];
 		if (tablica->getTablica()[lewyPotomekIndeks] > max) {

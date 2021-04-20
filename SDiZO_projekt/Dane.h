@@ -6,7 +6,7 @@ using namespace std;
 
 class Dane {
 public:
-	Dane();
+	Dane(TablicaDynamiczna*);
 	TablicaDynamiczna* getTablica();
 	void menu();
 	
