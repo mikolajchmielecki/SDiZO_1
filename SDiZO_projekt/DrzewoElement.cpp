@@ -26,6 +26,7 @@ DrzewoElement::DrzewoElement(const DrzewoElement& drzewoElement) {
     this->rodzic = NULL;
     this->typ = drzewoElement.typ;
     this->kolor =drzewoElement.kolor;
+    this->wysokosc = 1;
 }
 
 void DrzewoElement::usunPodrzewo() {
@@ -86,7 +87,7 @@ int DrzewoElement::getMaksymalnaSzerokosc() {
     else if (typ == Typ::AVL) {
         return szerokoscBST + 4;
     }
-    
+    return szerokoscBST;
 }
 
 DrzewoElement* DrzewoElement::getBrat() {
@@ -102,6 +103,7 @@ DrzewoElement* DrzewoElement::getBrat() {
     else if (this == rodzic->lewyPotomek) {
         return rodzic->prawyPotomek;
     }
+    return NULL;
 }
 
 /*

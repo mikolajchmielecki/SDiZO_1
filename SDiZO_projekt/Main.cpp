@@ -17,7 +17,7 @@ using namespace std;
 int liczbaOpcji = 7;
 string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane" };
 
-TablicaDynamiczna* daneTablica;
+TablicaDynamiczna* daneTablica = new TablicaDynamiczna();
 
 
 int main() {
@@ -29,7 +29,7 @@ int main() {
 		switch (menu.wyswietl()) {
 		case 0:
 		{
-			TablicaDynamiczna* tablica = new TablicaDynamiczna(*daneTablica);
+			TablicaDynamiczna* tablica = daneTablica;
 			IStrukturyLiniowe * iTablica = tablica;
 			MenuStrukturyLiniowe menuTablica = MenuStrukturyLiniowe(iTablica, "Tablica dynamiczna");
 			menuTablica.menu();

@@ -1,8 +1,9 @@
+#pragma once
 #include<string>
 #include "TablicaDynamiczna.h"
 
 using namespace std;
-#pragma once
+
 class Dane {
 public:
 	Dane();

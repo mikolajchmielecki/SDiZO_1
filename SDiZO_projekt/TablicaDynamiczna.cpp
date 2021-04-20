@@ -26,8 +26,8 @@ Tworzy tablicê ze wczytanych danych
 */
 TablicaDynamiczna::TablicaDynamiczna(const TablicaDynamiczna& tablica) {
 	if (&tablica == NULL) {
-		TablicaDynamiczna();
-		return;
+		this->rozmiar = 0;
+		this->tablica = NULL;
 	}
 	this->rozmiar = tablica.rozmiar;
 	this->tablica = tablica.tablica;

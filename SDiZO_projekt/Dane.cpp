@@ -13,7 +13,7 @@ Dane s¹ wczytywane do tablicy dynamicznej
 Dane::Dane() {
 	liczbaOpcji = 4;
 	
-	this->sciezka = "c:/dane.txt";
+	this->sciezka = "dane.txt";
 	
 
 }

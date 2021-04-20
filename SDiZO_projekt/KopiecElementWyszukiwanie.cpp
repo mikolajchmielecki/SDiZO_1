@@ -51,7 +51,7 @@ Tworzy œcie¿kê do celu w tablicy
 W indeksie 0 jest korzeñ
 */
 void KopiecElementWyszukiwanie::utworzSciezke(int cel) {
-	dlugoscSciezki = ceil(log2(cel + 2));
+	dlugoscSciezki = (int) ceil(log2(cel + 2));
 	sciezka = new int[dlugoscSciezki];
 	int indeks = cel;
 	for (int i = dlugoscSciezki - 1 ; i >= 0; i--) {

@@ -15,8 +15,7 @@ Kopiec::Kopiec(TablicaDynamiczna* tablica) {
 }
 
 Kopiec::Kopiec() {
-	this->tablica = NULL;
-	Kopiec(TablicaDynamiczna());
+	this->tablica = new TablicaDynamiczna();
 }
 
 
@@ -134,7 +133,7 @@ Naprawia kopiec wg algorytmu Floyda
 */
 void Kopiec::algorytmFloyda() {
 	for (int i = (tablica->getRozmiar() - 2) / 2; i >= 0; i--) {
-		//wyswietl();
+		tablica->wyswietl();
 		naprawKopiecDol(i);
 	}
 }
@@ -154,7 +153,9 @@ void Kopiec::naprawKopiecDol(int indeks) {
 	}
 	//istniej¹ oba potomki
 	else if (lewyPotomekIndeks != -1 && prawyPotomekIndeks != -1) {
-
+		cout << lewyPotomekIndeks +" ";
+		cout << prawyPotomekIndeks +" ";
+		cout << indeks +" ";
 		//znajdowanie maksymalnej wartoœci
 		int max = tablica->getTablica()[indeks];
 		if (tablica->getTablica()[lewyPotomekIndeks] > max) {

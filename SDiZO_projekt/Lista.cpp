@@ -57,10 +57,18 @@ Lista::Lista(TablicaDynamiczna* tablica) {
 
 			//ostatni element listy
 			if (i == rozmiar - 1) {
-				ogon = element;
-				ogon->nastepny = NULL;
-				ogon->poprzedni = bufor;
-				bufor->nastepny = ogon;
+				if (rozmiar == 1) {
+					ogon = element;
+					ogon->nastepny = NULL;
+					ogon->poprzedni = NULL;
+				}
+				else {
+					ogon = element;
+					ogon->nastepny = NULL;
+					ogon->poprzedni = bufor;
+					bufor->nastepny = ogon;
+				}
+				
 			}
 
 			//pozosta³e elementy listy

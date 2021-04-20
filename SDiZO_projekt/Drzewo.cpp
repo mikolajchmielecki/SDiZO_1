@@ -308,7 +308,8 @@ void Drzewo::usunRB(DrzewoElement* usuwany) {
 
 				while (true) {
 					//nowy brat X po przeniesieniu
-					DrzewoElement* brat = x->getBrat();
+					DrzewoElement* brat = NULL;
+					brat = x->getBrat();
 
 					//1 - x jest czarny a brat jest czerwony
 					if (x->kolor == Kolor::BLACK && brat->kolor == Kolor::RED) {
@@ -549,8 +550,8 @@ void Drzewo::naprawRB(DrzewoElement* nowy) {
 	if (nowy->rodzic->kolor == Kolor::BLACK) {
 		return;
 	}
-
-	DrzewoElement* stryj = nowy->rodzic->getBrat();
+	DrzewoElement* stryj = NULL;
+	stryj = nowy->rodzic->getBrat();
 	//stryj wstawianego wêz³a jest czerwony i nie jest NULLEM
 	//kolorujemy stryja i ojca na czarno a dziadka na czerwono i rekurencyjnie naprawiamy drzewo od dziadka
 	if (stryj != NULL && stryj->kolor == Kolor::RED) {

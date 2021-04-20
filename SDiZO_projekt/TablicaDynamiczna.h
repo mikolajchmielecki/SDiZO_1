@@ -1,6 +1,7 @@
+#pragma once
 #include <string>
 #include "IStrukturyLiniowe.h"
-#pragma once
+
 
 using namespace std;
 
@@ -23,8 +24,8 @@ public:
 	int* getTablica();
 	int* getTablicaKopia();
 	void zamien(int, int);
-
-private:
 	int rozmiar;
+private:
+	
 
 };
