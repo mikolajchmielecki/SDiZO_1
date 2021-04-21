@@ -57,7 +57,6 @@ Drzewo::~Drzewo() {
 		korzen->usunPodrzewo();
 		delete korzen;
 	}
-	cout << "Drzewo destruktor";
 }
 
 void Drzewo::dodaj(int liczba) {

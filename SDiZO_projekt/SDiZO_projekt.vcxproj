@@ -152,6 +152,7 @@
     <ClCompile Include="MenuStrukturyLiniowe.cpp" />
     <ClCompile Include="TablicaDynamiczna.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Testy.cpp" />
     <ClCompile Include="WyswietlanieDrzewa.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="MenuStrukturyDrzewiaste.h" />
     <ClInclude Include="MenuStrukturyLiniowe.h" />
     <ClInclude Include="IStrukturyDrzewiaste.h" />
+    <ClInclude Include="Testy.h" />
     <ClInclude Include="Typy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TablicaDynamiczna.h" />

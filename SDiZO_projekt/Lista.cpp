@@ -24,7 +24,6 @@ Lista::~Lista() {
 		delete iterator;
 		iterator = temp;
 	}
-	cout << "\nDestruktor lista\n";
 }
 
 /*

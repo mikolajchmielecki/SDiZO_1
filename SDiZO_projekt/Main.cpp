@@ -9,6 +9,7 @@
 #include "Lista.h"
 #include "Kopiec.h"
 #include "Drzewo.h"
+#include "Testy.h"
 
 
 using namespace std;
@@ -29,11 +30,11 @@ int main() {
 		switch (menu.wyswietl()) {
 		case 0:
 		{
+			//tablica zmienia daneTablica
 			TablicaDynamiczna* tablica = daneTablica;
 			IStrukturyLiniowe * iTablica = tablica;
 			MenuStrukturyLiniowe menuTablica = MenuStrukturyLiniowe(iTablica, "Tablica dynamiczna");
 			menuTablica.menu();
-			//delete tablica;
 		}
 			break;
 		case 1:
@@ -49,6 +50,7 @@ int main() {
 		
 		case 2:
 		{
+			//kopiec zmienia daneTablica
 			Kopiec* kopiec = new Kopiec(daneTablica);
 			IStrukturyDrzewiaste* iKopiec = kopiec;
 			MenuStrukturyDrzewiaste menuKopiec = MenuStrukturyDrzewiaste(iKopiec, "Kopiec");
@@ -94,7 +96,12 @@ int main() {
 		}
 		break;
 		case 7:
-			break;
+		{
+			Testy* testy = new Testy();
+			testy->wykonajTesty();
+			delete testy;
+		}
+		break;
 		}
 	}
 	delete daneTablica;

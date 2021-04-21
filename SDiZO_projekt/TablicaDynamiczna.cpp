@@ -42,7 +42,6 @@ TablicaDynamiczna::TablicaDynamiczna(const TablicaDynamiczna& tablica) {
 
 TablicaDynamiczna::~TablicaDynamiczna() {
 	delete[] tablica;
-	cout << "\nDestruktor tablica dynamiczna\n";
 }
 
 /*
@@ -207,6 +206,7 @@ void TablicaDynamiczna::generujLosoweDane(int liczbaDanych) {
 	uniform_int_distribution<> zakresDanych(0, liczbaDanych-1); // zakres wartoœci int
 	int indeksLosowejLiczby = zakresDanych(gen);
 	uniform_int_distribution<> zakresInt(-2147483648, 2147483647); // zakres wartoœci int
+	
 	for (int i = 0; i < liczbaDanych; i++) {
 		tablica[i] = zakresInt(gen);
 		if (i == indeksLosowejLiczby) {
@@ -214,6 +214,10 @@ void TablicaDynamiczna::generujLosoweDane(int liczbaDanych) {
 		}
 	}
 
+}
+
+int TablicaDynamiczna::getLosowaLiczba() {
+	return losowaLiczba;
 }
 
 

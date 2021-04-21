@@ -20,11 +20,9 @@ Kopiec::Kopiec() {
 
 
 /*
-Zwalnia pamiêæ po tablicy
+Nie robi nic. tablica jest przenoszona do menu g³ównego
 */
 Kopiec::~Kopiec() {
-	//delete tablica;
-	cout << "\nDestruktor kopiec\n";
 }
 
 /*

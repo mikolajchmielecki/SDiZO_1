@@ -25,6 +25,7 @@ public:
 	int* getTablicaKopia();
 	void zamien(int, int);
 	void generujLosoweDane(int);
+	int getLosowaLiczba();
 private:
 	int rozmiar;
 	int losowaLiczba;
