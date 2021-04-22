@@ -18,5 +18,8 @@ enum class Operacja {
 	ListaUsunPoczatek, ListaUsunKoniec, ListaUsunSrodek, ListaDodajPoczatek, ListaDodajKoniec, ListaDodajSrodek, ListaWyszukaj,
 	KopiecUsun, KopiecDodaj, KopiecWyszukaj,
 	RBUsun, RBDodaj, RBWyszukaj,
-	AVLUsun, AVLDodaj, AVLWyszukaj
+	AVLUsun, AVLDodaj, AVLWyszukaj,
+	STLListUsunPoczatek, STLListUsunKoniec, STLListUsunSrodek, STLListDodajPoczatek, STLListDodajKoniec, STLListDodajSrodek, STLListWyszukaj,
+	STLVectorUsunPoczatek, STLVectorUsunKoniec, STLVectorUsunSrodek, STLVectorDodajPoczatek, STLVectorDodajKoniec, STLVectorDodajSrodek, STLVectorWyszukaj
+
 };

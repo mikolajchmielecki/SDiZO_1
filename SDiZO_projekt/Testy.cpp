@@ -23,6 +23,7 @@ Testy::Testy() {
 }
 
 void Testy::wykonajTesty() {
+	/*
 	cout << "Testy tablica..." << endl;
 	
 	int rozmiarTablica = 2000000;
@@ -61,6 +62,29 @@ void Testy::wykonajTesty() {
 	wykonajTest(Operacja::AVLDodaj, AVLRozmiar);
 	wykonajTest(Operacja::AVLUsun, AVLRozmiar);
 	wykonajTest(Operacja::AVLWyszukaj, AVLRozmiar);
+	*/
+	cout << "Testy STL List..." << endl;
+
+	int rozmiarSTLList = 2000000;
+	wykonajTest(Operacja::STLListDodajKoniec, rozmiarSTLList);
+	wykonajTest(Operacja::STLListDodajPoczatek, rozmiarSTLList);
+	wykonajTest(Operacja::STLListDodajSrodek, rozmiarSTLList);
+	wykonajTest(Operacja::STLListUsunPoczatek, rozmiarSTLList);
+	wykonajTest(Operacja::STLListUsunSrodek, rozmiarSTLList);
+	wykonajTest(Operacja::STLListUsunKoniec, rozmiarSTLList);
+	wykonajTest(Operacja::STLListWyszukaj, rozmiarSTLList);
+
+	cout << "Testy STL Vector..." << endl;
+
+	int rozmiarSTLVector = 2000000;
+	wykonajTest(Operacja::STLVectorDodajKoniec, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorDodajPoczatek, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorDodajSrodek, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorUsunPoczatek, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorUsunSrodek, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorUsunKoniec, rozmiarSTLVector);
+	wykonajTest(Operacja::STLVectorWyszukaj, rozmiarSTLVector);
+
 
 }
 
@@ -87,6 +111,8 @@ void Testy::wykonajTest(Operacja operacja, int maksymalnyRozmiar) {
 			Kopiec* kopiec = NULL;
 			Drzewo* rb = NULL;
 			Drzewo* avl = NULL;
+			STLList* list = NULL;
+			STLVector* vector = NULL;
 
 			switch (operacja) {
 
@@ -239,7 +265,98 @@ void Testy::wykonajTest(Operacja operacja, int maksymalnyRozmiar) {
 				koniec = read_QPC() - start;
 				break;
 
+				//---------STLList----------------
+			case Operacja::STLListDodajPoczatek:
+				list = new STLList(tablica);
+				start = read_QPC();
+				list->dodajPoczatek(nowaLosowaLiczba);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListDodajKoniec:
+				list = new STLList(tablica);
+				start = read_QPC();
+				list->dodajKoniec(nowaLosowaLiczba);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListDodajSrodek:
+				list = new STLList(tablica);
+				pozycja = tablica->getRozmiar() / 2;
+				start = read_QPC();
+				list->dodaj(nowaLosowaLiczba, pozycja);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListUsunPoczatek:
+				list = new STLList(tablica);
+				start = read_QPC();
+				list->usunPoczatek();
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListUsunKoniec:
+				list = new STLList(tablica);
+				start = read_QPC();
+				list->usunKoniec();
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListUsunSrodek:
+				list = new STLList(tablica);
+				pozycja = tablica->getRozmiar() / 2;
+				start = read_QPC();
+				list->usun(pozycja);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLListWyszukaj:
+				list = new STLList(tablica);
+				start = read_QPC();
+				list->wyszukaj(losowaLiczba);
+				koniec = read_QPC() - start;
+				break;
 
+
+			//---------STLVector----------------
+			case Operacja::STLVectorDodajPoczatek:
+				vector = new STLVector(tablica);
+				start = read_QPC();
+				vector->dodajPoczatek(nowaLosowaLiczba);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorDodajKoniec:
+				vector = new STLVector(tablica);
+				start = read_QPC();
+				vector->dodajKoniec(nowaLosowaLiczba);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorDodajSrodek:
+				vector = new STLVector(tablica);
+				pozycja = tablica->getRozmiar() / 2;
+				start = read_QPC();
+				vector->dodaj(nowaLosowaLiczba, pozycja);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorUsunPoczatek:
+				vector = new STLVector(tablica);
+				start = read_QPC();
+				vector->usunPoczatek();
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorUsunKoniec:
+				vector = new STLVector(tablica);
+				start = read_QPC();
+				vector->usunKoniec();
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorUsunSrodek:
+				vector = new STLVector(tablica);
+				pozycja = tablica->getRozmiar() / 2;
+				start = read_QPC();
+				vector->usun(pozycja);
+				koniec = read_QPC() - start;
+				break;
+			case Operacja::STLVectorWyszukaj:
+				vector = new STLVector(tablica);
+				start = read_QPC();
+				vector->wyszukaj(losowaLiczba);
+				koniec = read_QPC() - start;
+				break;
 
 			
 			}
@@ -255,6 +372,12 @@ void Testy::wykonajTest(Operacja operacja, int maksymalnyRozmiar) {
 			}
 			if(avl != NULL) {
 				delete avl;
+			}
+			if (list != NULL) {
+				delete list;
+			}
+			if (vector != NULL) {
+				delete vector;
 			}
 			delete tablica;
 		}
@@ -376,6 +499,48 @@ string Testy::nazwa(Operacja operacja) {
 		break;
 	case Operacja::AVLWyszukaj:
 		wynik = "AVL: wyszukiwanie";
+		break;
+	case Operacja::STLListDodajKoniec:
+		wynik = "STL List: dodawanie na koniec";
+		break;
+	case Operacja::STLListDodajPoczatek:
+		wynik = "STL List: dodawanie na poczatek";
+		break;
+	case Operacja::STLListDodajSrodek:
+		wynik = "STL List: dodawanie na srodek";
+		break;
+	case Operacja::STLListUsunKoniec:
+		wynik = "STL List: usuwanie z konca";
+		break;
+	case Operacja::STLListUsunPoczatek:
+		wynik = "STL List: usuwanie z poczatku";
+		break;
+	case Operacja::STLListUsunSrodek:
+		wynik = "STL List: usuwanie ze srodka";
+		break;
+	case Operacja::STLListWyszukaj:
+		wynik = "STL List: wyszukiwanie";
+		break;
+	case Operacja::STLVectorDodajKoniec:
+		wynik = "STL Vector: dodawanie na koniec";
+		break;
+	case Operacja::STLVectorDodajPoczatek:
+		wynik = "STL Vector: dodawanie na poczatek";
+		break;
+	case Operacja::STLVectorDodajSrodek:
+		wynik = "STL Vector: dodawanie na srodek";
+		break;
+	case Operacja::STLVectorUsunKoniec:
+		wynik = "STL Vector: usuwanie z konca";
+		break;
+	case Operacja::STLVectorUsunPoczatek:
+		wynik = "STL Vector: usuwanie z poczatku";
+		break;
+	case Operacja::STLVectorUsunSrodek:
+		wynik = "STL Vector: usuwanie ze srodka";
+		break;
+	case Operacja::STLVectorWyszukaj:
+		wynik = "STL Vector: wyszukiwanie";
 		break;
 	}
 	return wynik;

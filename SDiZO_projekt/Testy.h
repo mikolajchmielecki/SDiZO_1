@@ -12,6 +12,8 @@
 #include <windows.h>
 #include <iomanip>
 #include "Typy.h"
+#include "STLList.h"
+#include "STLVector.h"
 
 class Testy {
 public:
