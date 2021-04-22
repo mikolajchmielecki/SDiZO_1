@@ -10,21 +10,29 @@
 #include "Kopiec.h"
 #include "Drzewo.h"
 #include "Testy.h"
+#include "STLList.h"
+#include "STLVector.h"
 
 
 using namespace std;
 
 
-int liczbaOpcji = 8;
-string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane", "przeprowadü testy" };
+int liczbaOpcji = 10;
+string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane", "przeprowadü testy (kilkanaúcie minut)", "STL list", "STL vector" };
 
 TablicaDynamiczna* daneTablica = new TablicaDynamiczna();
 
 
 int main() {
 	setlocale(LC_ALL, "polish");
+	cout << "+--------------------------------------------------------------------------+" << endl;
+	cout << "| SDiZO - zadanie projektowe nr 1                                          |" << endl;
+	cout << "| Autor: Miko≥aj Chmielecki                                                |" << endl;
+	cout << "| Data realizacji projektu: 2021-04-26                                     |" << endl;
+	cout << "| W menu Dane wczytujemy dane, menu Tablica dynamiczna oraz Kopiec         |" << endl;
+	cout << "| zmieniajπ dane wczytane do programu i przekazujπ je do Menu g≥Ûwnego     |" << endl;
+	cout << "+--------------------------------------------------------------------------+" << endl;
 
-	cout << "SDiZO projekt\n";
 	Menu menu = Menu(liczbaOpcji, opcje, "Menu g≥Ûwne");
 	while (menu.czyUruchomione()) {
 		switch (menu.wyswietl()) {
@@ -100,6 +108,15 @@ int main() {
 			Testy* testy = new Testy();
 			testy->wykonajTesty();
 			delete testy;
+		}
+		break;
+		case 8:
+		{
+			STLList* list = new STLList(daneTablica);
+			IStrukturyLiniowe* iList = list;
+			MenuStrukturyLiniowe menuList = MenuStrukturyLiniowe(iList, "STL List");
+			menuList.menu();
+			delete list;
 		}
 		break;
 		}

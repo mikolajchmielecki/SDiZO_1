@@ -87,7 +87,7 @@ void MenuStrukturyLiniowe::usunMenu() {
 	if (wejscie[0] == -1) {
 		(*struktura).usunKoniec();
 	}
-	else if (wejscie[1] == 0) {
+	else if (wejscie[0] == 0) {
 		(*struktura).usunPoczatek();
 	}
 	else {
