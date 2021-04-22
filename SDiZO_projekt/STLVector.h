@@ -14,6 +14,7 @@ public:
 	virtual void usunKoniec();
 	virtual void usun(int pozycja);
 	virtual int wyszukaj(int liczba);
+	virtual void wyswietl();
 private:
 	vector<int> tablica;
 

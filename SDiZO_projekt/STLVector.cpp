@@ -1,43 +1,44 @@
-#include "STLList.h"
+#include "STLVector.h"
 #include <iostream>
 //wyszukiwanie w liscie
 #include <algorithm>
+#include <cassert>
 using namespace std;
 
 /*
 Inicjowanie listy
 */
-STLList::STLList(TablicaDynamiczna* dane) {
+STLVector::STLVector(TablicaDynamiczna* dane) {
 	int rozmiar = dane->getRozmiar();
 	//dodawanie do listy
 	for (int i = rozmiar - 1; i >= 0; i--) {
-		lista.push_back(dane->getTablica()[i]);
+		tablica.push_back(dane->getTablica()[i]);
 	}
 }
 
-void STLList::dodajPoczatek(int liczba) {
-	lista.push_front(liczba);
+void STLVector::dodajPoczatek(int liczba) {
+	tablica.insert(tablica.begin(), 1, liczba);
 }
 
-void STLList::dodajKoniec(int liczba) {
-	lista.push_back(liczba);
+void STLVector::dodajKoniec(int liczba) {
+	tablica.push_back(liczba);
 }
 
-void STLList::dodaj(int liczba, int pozycja) {
-	list<int>::iterator it = lista.begin();
+void STLVector::dodaj(int liczba, int pozycja) {
+	vector<int>::iterator it = tablica.begin();
 	advance(it, pozycja);
-	lista.insert(it, liczba);
+	tablica.insert(it, liczba);
 
 }
 
 
-int STLList::wyszukaj(int liczba) {
-	list<int>::iterator it;
-	it = find(lista.begin(), lista.end(), liczba);
-	if (it != lista.end())
+int STLVector::wyszukaj(int liczba) {
+	vector<int>::iterator it;
+	it = find(tablica.begin(), tablica.end(), liczba);
+	if (it != tablica.end())
 	{
 
-		return distance(lista.begin(), it);
+		return distance(tablica.begin(), it);
 	}
 	else
 	{
@@ -45,21 +46,22 @@ int STLList::wyszukaj(int liczba) {
 	}
 }
 
-void STLList::usunPoczatek() {
-	lista.pop_front();
+void STLVector::usunPoczatek() {
+	assert(!tablica.empty());
+	tablica.erase(tablica.begin());
 }
-void STLList::usunKoniec() {
-	lista.pop_back();
+void STLVector::usunKoniec() {
+	tablica.pop_back();
 }
-void STLList::usun(int pozycja) {
-	list<int>::iterator it = lista.begin();
+void STLVector::usun(int pozycja) {
+	vector<int>::iterator it = tablica.begin();
 	advance(it, pozycja);
-	lista.erase(it);
+	tablica.erase(it);
 }
 
-void STLList::wyswietl() {
+void STLVector::wyswietl() {
 	cout << "[ ";
-	for (list<int>::iterator i = lista.begin(); i != lista.end(); i++) {
+	for (vector<int>::iterator i = tablica.begin(); i != tablica.end(); i++) {
 		cout << *i << " ";
 	}
 	cout << "]";

@@ -119,6 +119,15 @@ int main() {
 			delete list;
 		}
 		break;
+		case 9:
+		{
+			STLVector* vector = new STLVector(daneTablica);
+			IStrukturyLiniowe* iVector = vector;
+			MenuStrukturyLiniowe menuVector = MenuStrukturyLiniowe(iVector, "STL Vector");
+			menuVector.menu();
+			delete vector;
+		}
+		break;
 		}
 	}
 	delete daneTablica;
