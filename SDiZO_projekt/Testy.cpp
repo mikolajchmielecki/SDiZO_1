@@ -14,16 +14,16 @@ Testy::Testy() {
 	koniec = 0;
 	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);
 	//liczba realizowanych testów dla danego rozmiaru struktury
-	liczbaPomiarow = 20;
+	liczbaPomiarow = 100;
 	//liczba ró¿nych rozmiarów
-	liczbaRozmiarow = 50;
+	liczbaRozmiarow = 100;
 	
 
 	
 }
 
 void Testy::wykonajTesty() {
-	/*
+	
 	cout << "Testy tablica..." << endl;
 	
 	int rozmiarTablica = 2000000;
@@ -62,10 +62,10 @@ void Testy::wykonajTesty() {
 	wykonajTest(Operacja::AVLDodaj, AVLRozmiar);
 	wykonajTest(Operacja::AVLUsun, AVLRozmiar);
 	wykonajTest(Operacja::AVLWyszukaj, AVLRozmiar);
-	*/
+
 	cout << "Testy STL List..." << endl;
 
-	int rozmiarSTLList = 2000000;
+	int rozmiarSTLList = 1000000;
 	wykonajTest(Operacja::STLListDodajKoniec, rozmiarSTLList);
 	wykonajTest(Operacja::STLListDodajPoczatek, rozmiarSTLList);
 	wykonajTest(Operacja::STLListDodajSrodek, rozmiarSTLList);

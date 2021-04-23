@@ -18,7 +18,7 @@ using namespace std;
 
 
 int liczbaOpcji = 10;
-string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane", "przeprowadü testy (kilkanaúcie minut)", "STL list", "STL vector" };
+string opcje[] = { "tablica dynamiczna", "lista", "kopiec", "BST", "drzewo czerwono-czarne", "drzewo AVL", "dane", "przeprowadü testy (kilka godzin)", "STL list", "STL vector" };
 
 TablicaDynamiczna* daneTablica = new TablicaDynamiczna();
 
