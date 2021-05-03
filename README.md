@@ -36,7 +36,7 @@ danej struktury,<br/>
 • po wczytaniu danych z pliku dane sa pamietane przez tablice dynamiczna,<br/>
 • kazda ze struktur danych podczas tworzenia korzysta z tablicy dynamicznej.<br/>
 
-##Technologie
-> Microsoft Visual Studio Community 2019
-> C++
-> STL lib
+## Technologie
+> Microsoft Visual Studio Community 2019  
+> C++  
+> STL lib  
