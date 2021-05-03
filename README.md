@@ -1,7 +1,5 @@
 # Struktury Danych i Złożoność Obliczeniowa
-## Spis treści
-* [Ogólne informacje](#Ogólne-informacje)
-* [Opis](#Opis)
+
 
 ## Ogólne informacje
 w nastepujacych strukturach danych:<br/>
@@ -37,3 +35,8 @@ danej struktury,<br/>
 • kazdorazowo po zmianie danych w strukturze wyswietlana jest je aktualna zwartosc,<br/>
 • po wczytaniu danych z pliku dane sa pamietane przez tablice dynamiczna,<br/>
 • kazda ze struktur danych podczas tworzenia korzysta z tablicy dynamicznej.<br/>
+
+##Technologie
+> Microsoft Visual Studio Community 2019
+> C++
+> STL lib
